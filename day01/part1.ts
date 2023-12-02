@@ -1,10 +1,8 @@
 import path from 'node:path'
+import { loadFileContents, splitIntoLines } from '../helpers'
 
 const solve = (input: string): number =>
-  // Split into lines
-  input.split('\n')
-    // Trim blank lines
-    .filter(l => l.trim() !== '')
+  splitIntoLines(input)
     // Find digits
     .map(l => l.split('').filter(c => !Number.isNaN(Number(c))))
     // Find calibration values
@@ -14,8 +12,7 @@ const solve = (input: string): number =>
 
 const solveFile = async (fileName: string): Promise<void> => {
   const filePath = path.join(import.meta.dir, fileName)
-  const file = Bun.file(filePath)
-  const solution = solve(await file.text())
+  const solution = solve(await loadFileContents(filePath))
   console.log(`${fileName}: ${solution}`)
 }
 

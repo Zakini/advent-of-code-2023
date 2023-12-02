@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { loadFileContents, splitIntoLines } from '../helpers'
 
 const textDigitMap = {
   one:   '1', two:   '2', three: '3',
@@ -12,9 +13,7 @@ const isTextDigit = (v: string): v is TextDigit =>
   Object.keys(textDigitMap).includes(v)
 
 const solve = (input: string): number => {
-  // Split into lines and trim blank lines
-  const lines =  input.split('\n')
-    .filter(l => l.trim() !== '')
+  const lines = splitIntoLines(input)
 
   const calibrationValues: number[] = []
 
@@ -53,8 +52,7 @@ const solve = (input: string): number => {
 
 const solveFile = async (fileName: string): Promise<void> => {
   const filePath = path.join(import.meta.dir, fileName)
-  const file = Bun.file(filePath)
-  const solution = solve(await file.text())
+  const solution = solve(await loadFileContents(filePath))
   console.log(`${fileName}: ${solution}`)
 }
 
