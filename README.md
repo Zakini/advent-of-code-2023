@@ -1,15 +1,20 @@
-# advent-of-code-2023
+# Advent of Code 2023
+https://adventofcode.com/2023
 
-To install dependencies:
+This year, I'm trying out [Bun](https://bun.sh/)
 
-```bash
-bun install
+## Running
+First, install dependencies with `bun install`
+
+Each solutions is in its own file, organised by day and task
+```
+day01
+  ↳ task1.ts
+  ↳ task2.ts
+day02
+  ↳ task1.ts
+  ↳ task2.ts
 ```
 
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.0.14. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+To run the solutions, add an `input.txt` file that contains your puzzle input into the matching day  
+folder, then run `bun run dayX/taskY.ts`
