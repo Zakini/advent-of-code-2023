@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { loadFileContents, splitIntoLines } from '../helpers'
+import { loadFileContents, splitIntoLines, sumReducer } from '../helpers'
 
 const solve = (input: string): number =>
   splitIntoLines(input)
@@ -8,7 +8,7 @@ const solve = (input: string): number =>
     // Find calibration values
     .map(l => Number(`${l[0]}${l[l.length - 1]}`))
     // Sum everything up
-    .reduce((a, v) => a + v)
+    .reduce(sumReducer)
 
 const solveFile = async (fileName: string): Promise<void> => {
   const filePath = path.join(import.meta.dir, fileName)
