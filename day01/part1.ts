@@ -19,5 +19,5 @@ const solveFile = async (fileName: string): Promise<void> => {
   console.log(`${fileName}: ${solution}`)
 }
 
-await solveFile('example.txt')
+await solveFile('examplePart1.txt')
 await solveFile('input.txt')
