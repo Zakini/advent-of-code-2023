@@ -1,0 +1,34 @@
+name: Update AoC stars badge
+
+on:
+  workflow_dispatch:
+  push:
+  schedule:
+    # See: https://cron.help/#0_*/3_*_*_*
+    - cron: '0 */3 * * *'
+
+jobs:
+  update-badge:
+    name: Update badge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get stars
+        run: |
+          STATUS=$(curl --silent --output leaderboard.json --write-out "%{http_code}" ${{ vars.PRIVATE_LEADERBOARD_URL }})
+
+          if [[ $STATUS -ne 200 ]]; then
+            exit 1
+          fi
+
+          STARS=$(cat leaderboard.json | jq '.members."${{ vars.AOC_USER_ID }}".stars')
+          echo $STARS
+      - name: Create badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        with:
+          auth: ${{ secrets.BADGE_GIST_ACCESS_TOKEN }}
+          gistID: ${{ vars.BADGE_GIST_ID }}
+          filename: stars.json
+          label: ⭐️
+          message: X Stars
+          color: #0f0f23
+          labelColor: #0f0f23
