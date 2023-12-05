@@ -1,31 +1,10 @@
 import path from 'node:path'
 import { loadFileContents, splitIntoLines, sumReducer } from '../helpers'
-
-type SchematicNumber = {
-  num: number,
-  coordinates: { x: number, y: number },
-  numLength: number,
-}
+import { findSchematicNumbers } from './common'
 
 const solve = (input: string): number => {
   const lines = splitIntoLines(input)
-
-  const schematicNumbers: SchematicNumber[] = []
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i]
-    const regex = /\d+/g
-
-    let match = regex.exec(line)
-    while (match !== null) {
-      schematicNumbers.push({
-        num: Number(match[0]),
-        coordinates: { x: match.index, y: i },
-        numLength: match[0].length,
-      })
-
-      match = regex.exec(line)
-    }
-  }
+  const schematicNumbers = findSchematicNumbers(input)
 
   const partNumbers: number[] = []
   for (const num of schematicNumbers) {
