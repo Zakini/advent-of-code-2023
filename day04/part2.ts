@@ -1,5 +1,4 @@
-import path from 'node:path'
-import { loadFileContents, sumReducer } from '../helpers'
+import { fileSolverFactory, sumReducer } from '../helpers'
 import { ScratchCard, countScratchCardMatches, parseScratchCards } from './common'
 
 type CopyableScratchCard = ScratchCard & {
@@ -21,11 +20,7 @@ const solve = (input: string): number => {
   return cards.map(c => c.copies).reduce(sumReducer)
 }
 
-const solveFile = async (fileName: string): Promise<void> => {
-  const filePath = path.join(import.meta.dir, fileName)
-  const solution = solve(await loadFileContents(filePath))
-  console.log(`${fileName}: ${solution}`)
-}
+const solveFile = fileSolverFactory(import.meta.dir, solve)
 
 await solveFile('example.txt')
 await solveFile('input.txt')

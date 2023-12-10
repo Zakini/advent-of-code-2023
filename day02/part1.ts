@@ -1,5 +1,4 @@
-import path from 'node:path'
-import { loadFileContents, splitIntoLines, sumReducer } from '../helpers'
+import { fileSolverFactory, splitIntoLines, sumReducer } from '../helpers'
 import { CubeSet, parseGame } from './common'
 
 const solve = (input: string, target: CubeSet): number =>
@@ -16,11 +15,7 @@ const solve = (input: string, target: CubeSet): number =>
     // Sum game IDs together
     .reduce(sumReducer)
 
-const solveFile = async (fileName: string, targetCubeSet: CubeSet): Promise<void> => {
-  const filePath = path.join(import.meta.dir, fileName)
-  const solution = solve(await loadFileContents(filePath), targetCubeSet)
-  console.log(`${fileName}: ${solution}`)
-}
+const solveFile = fileSolverFactory(import.meta.dir, solve)
 
 const targetCubeSet = { red: 12, green: 13, blue: 14 }
 await solveFile('example.txt', targetCubeSet)
