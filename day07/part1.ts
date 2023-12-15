@@ -1,4 +1,4 @@
-import { fileSolverFactory, splitIntoLines, sumReducer } from '../helpers'
+import { fileSolverFactory, sortDesc, sortNum, splitIntoLines, sumReducer } from '../helpers'
 
 const cardValueMap = {
   'A': 14, 'K': 13, 'Q': 12, 'J': 11,
@@ -24,8 +24,6 @@ type Hand = {
 }
 type HandType = keyof typeof typeRankingMap
 
-type Sorter<T> = (a: T, b: T) => number
-
 const isCard = (v: string): v is Card => Object.keys(cardValueMap).includes(v)
 
 const parseLine = (line: string): Hand => {
@@ -39,9 +37,6 @@ const parseLine = (line: string): Hand => {
 
   return { cards, bid }
 }
-
-const sortNum = (a: number, b: number): number => a - b
-const sortDesc = <T>(sorter: Sorter<T>): Sorter<T> => (a, b) => sorter(b, a)
 
 const findHandType = (hand: Hand): HandType => {
   const cardCounts = hand.cards.reduce<Partial<Record<Card, number>>>(

@@ -21,3 +21,7 @@ export const fileSolverFactory = <T extends Solver>(dir: string, solver: T) =>
     const solution = solver(await loadFileContents(filePath), ...solverArgs)
     console.log(`${fileName}: ${solution}`)
   }
+
+type Sorter<T> = (a: T, b: T) => number
+export const sortNum = (a: number, b: number): number => a - b
+export const sortDesc = <T>(sorter: Sorter<T>): Sorter<T> => (a, b) => sorter(b, a)

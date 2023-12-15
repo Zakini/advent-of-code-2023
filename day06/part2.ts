@@ -1,4 +1,4 @@
-import { fileSolverFactory, splitIntoLines } from '../helpers'
+import { fileSolverFactory, sortNum, splitIntoLines } from '../helpers'
 
 type RaceResult = { time: number, distance: number }
 // ax² + bx + c = 0
@@ -47,7 +47,7 @@ const solve = (input: string): number => {
   const roots = solveQuadratic(quadraticify(parseRaceResults(input)))
   if (!roots) throw new Error('Could not find roots for this equation')
 
-  const [lowRoot, highRoot] = roots.sort((a, b) => a - b)
+  const [lowRoot, highRoot] = roots.sort(sortNum)
 
   return Math.floor(highRoot) - Math.ceil(lowRoot) + 1
 }
