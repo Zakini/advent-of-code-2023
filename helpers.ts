@@ -8,7 +8,12 @@ export const splitIntoLines = (input: string): string[] =>
     // Trim blank lines
     .filter(l => l.trim() !== '')
 
+export const splitIntoChunks = (input: string): string[] =>
+  input.split('\n\n').map(v => v.trim())
+
 export const sumReducer = (a: number, v: number): number => a + v
+export const objectCombineReducer = <K extends keyof any, V>(a: Record<K, V>, v: Record<K, V>): Record<K, V> =>
+  ({ ...a, ...v })
 
 type ParametersExceptFirst<F> =
   F extends (arg0: any, ...rest: infer R) => any ? R : never;

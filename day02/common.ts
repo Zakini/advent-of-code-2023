@@ -1,3 +1,5 @@
+import { objectCombineReducer } from '../helpers'
+
 const cubeColours = ['red', 'green', 'blue'] as const
 
 export type CubeColour = typeof cubeColours[number]
@@ -30,7 +32,7 @@ export const parseGame = (input: string): Game => {
           }
           return { [colour]: Number(count) }
         })
-        .reduce((a, v) => ({ ...a, ...v }))
+        .reduce(objectCombineReducer)
     )
 
   return { id, cubeSets }

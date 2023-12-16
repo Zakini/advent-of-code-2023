@@ -1,4 +1,4 @@
-import { fileSolverFactory, splitIntoLines } from '../helpers'
+import { fileSolverFactory, splitIntoChunks, splitIntoLines } from '../helpers'
 
 type AlmanacMapSegment = {
   sourceStart: number,
@@ -36,7 +36,7 @@ const applyMap = (value: number, map: AlmanacMap): number => {
 }
 
 const solve = (input: string): number => {
-  const [rawSeeds, ...rawMaps] = input.split('\n\n').map(v => v.trim())
+  const [rawSeeds, ...rawMaps] = splitIntoChunks(input)
   const seeds = parseSeeds(rawSeeds)
   const maps = parseMaps(rawMaps)
 
