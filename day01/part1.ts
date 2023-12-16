@@ -11,5 +11,5 @@ const solve = (input: string): number =>
 
 const solveFile = fileSolverFactory(import.meta.dir, solve)
 
-await solveFile('examplePart1.txt')
+await solveFile('example-part1.txt')
 await solveFile('input.txt')
