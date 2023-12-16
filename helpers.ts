@@ -14,6 +14,7 @@ export const splitIntoChunks = (input: string): string[] =>
 export const sumReducer = (a: number, v: number): number => a + v
 export const objectCombineReducer = <K extends keyof any, V>(a: Record<K, V>, v: Record<K, V>): Record<K, V> =>
   ({ ...a, ...v })
+export const minReducer = (m: number, v: number): number => Math.min(m, v)
 
 type ParametersExceptFirst<F> =
   F extends (arg0: any, ...rest: infer R) => any ? R : never;

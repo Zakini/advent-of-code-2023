@@ -1,4 +1,4 @@
-import { fileSolverFactory, splitIntoChunks, splitIntoLines } from '../helpers'
+import { fileSolverFactory, minReducer, splitIntoChunks, splitIntoLines } from '../helpers'
 
 type AlmanacMapSegment = {
   sourceStart: number,
@@ -41,7 +41,7 @@ const solve = (input: string): number => {
   const maps = parseMaps(rawMaps)
 
   return seeds.map(s => maps.reduce((a, m) => applyMap(a, m), s))
-    .reduce((m, v) => Math.min(m, v))
+    .reduce(minReducer)
 }
 
 const solveFile = fileSolverFactory(import.meta.dir, solve)
